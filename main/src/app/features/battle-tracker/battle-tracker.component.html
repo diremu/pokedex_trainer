@@ -1,1 +1,68 @@
-<p>battle-tracker works!</p>
+<section class="battle-tracker-page">
+  <div class="page-header">
+    <h1>Battle Tracker</h1>
+    <p>Log and analyze your Pokémon battles</p>
+  </div>
+
+  <div class="battle-controls">
+    <button class="btn btn-primary">Log New Battle</button>
+    <select class="filter-select">
+      <option>All Battles</option>
+      <option>Won</option>
+      <option>Lost</option>
+      <option>Draw</option>
+    </select>
+  </div>
+
+  <div class="battle-history">
+    <table class="battle-table">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Opponent</th>
+          <th>Your Team</th>
+          <th>Result</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>2024-04-20</td>
+          <td>Gary Oak</td>
+          <td>Pikachu, Charizard, Blastoise</td>
+          <td><span class="badge-win">Won</span></td>
+          <td><button class="btn btn-sm">View Details</button></td>
+        </tr>
+        <tr>
+          <td>2024-04-19</td>
+          <td>Brock</td>
+          <td>Pikachu, Butterfree, Pidgeot</td>
+          <td><span class="badge-win">Won</span></td>
+          <td><button class="btn btn-sm">View Details</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="battle-stats">
+    <h2>Your Statistics</h2>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <span class="stat-label">Total Battles</span>
+        <span class="stat-value">25</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">Wins</span>
+        <span class="stat-value">18</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">Win Rate</span>
+        <span class="stat-value">72%</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">Streak</span>
+        <span class="stat-value">4</span>
+      </div>
+    </div>
+  </div>
+</section>

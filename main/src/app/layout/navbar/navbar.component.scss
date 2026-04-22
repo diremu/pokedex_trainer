@@ -1,0 +1,103 @@
+$poke-red: #ef5350;
+$poke-blue: #3b4cca;
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  height: 80px;
+  background: white;
+  border-bottom: 2px solid #f0f0f0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-left {
+  .app-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: $poke-red;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+}
+
+.navbar-center {
+  flex: 1;
+  max-width: 400px;
+  margin: 0 2rem;
+
+  .search-input {
+    width: 100%;
+    padding: 10px 16px;
+    border: 2px solid #e0e0e0;
+    border-radius: 20px;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+
+    &:focus {
+      outline: none;
+      border-color: $poke-red;
+    }
+  }
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.trainer-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  span {
+    font-size: 14px;
+    color: #333;
+
+    strong {
+      color: $poke-blue;
+      font-weight: 700;
+    }
+  }
+
+  .trainer-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid $poke-red;
+    object-fit: cover;
+  }
+}
+
+// Responsive
+@media (max-width: 768px) {
+  .navbar {
+    flex-wrap: wrap;
+    height: auto;
+    padding: 1rem;
+  }
+
+  .navbar-left {
+    flex-basis: 100%;
+    margin-bottom: 0.5rem;
+  }
+
+  .navbar-center {
+    flex-basis: 100%;
+    margin: 0.5rem 0;
+    max-width: none;
+  }
+
+  .navbar-right {
+    flex-basis: 100%;
+  }
+
+  .trainer-name {
+    display: hidden;
+  }
+}

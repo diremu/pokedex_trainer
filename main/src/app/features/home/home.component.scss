@@ -1,0 +1,142 @@
+$poke-red: #ef5350;
+$poke-blue: #3b4cca;
+$poke-yellow: #ffd700;
+
+.home-page {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  overflow: hidden;
+}
+
+.hero-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 2rem;
+  padding: 3rem;
+  background: linear-gradient(160deg, $poke-red 20%, $poke-blue 100%);
+  border-radius: 12px;
+  color: white;
+
+  .hero-content {
+    h1 {
+      font-size: 48px;
+      margin: 0 0 1rem 0;
+      font-weight: 700;
+    }
+
+    p {
+      font-size: 18px;
+      margin: 0 0 2rem 0;
+      opacity: 0.95;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+
+      .btn {
+        padding: 12px 28px;
+        font-size: 16px;
+        border-radius: 8px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        text-decoration: none;
+
+        &.btn-primary {
+          background: white;
+          color: $poke-red;
+
+          &:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+          }
+        }
+
+        &.btn-secondary {
+          background: rgba(255, 255, 255, 0.2);
+          color: white;
+          border: 2px solid white;
+
+          &:hover {
+            background: rgba(255, 255, 255, 0.3);
+          }
+        }
+      }
+    }
+  }
+
+  .hero-image {
+    width: 40%;
+    max-width: 400px;
+    height: auto;
+    filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.2));
+  }
+}
+
+.features-section {
+  h2 {
+    font-size: 32px;
+    margin: 0 0 2rem 0;
+    color: $poke-blue;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+  }
+}
+
+.feature-card {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  text-align: center;
+
+  &:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+  }
+
+  .feature-icon {
+    font-size: 48px;
+    display: block;
+    margin-bottom: 1rem;
+  }
+
+  h3 {
+    font-size: 20px;
+    margin: 0 0 1rem 0;
+    color: $poke-blue;
+  }
+
+  p {
+    margin: 0;
+    color: #666;
+    line-height: 1.6;
+  }
+}
+
+// Responsive
+@media (max-width: 768px) {
+  .hero-section {
+    grid-template-columns: 1fr;
+    padding: 2rem;
+
+    .hero-image {
+      max-width: 300px;
+    }
+  }
+
+  .features-section h2 {
+    font-size: 24px;
+  }
+
+  .feature-card {
+    padding: 1.5rem;
+  }
+}

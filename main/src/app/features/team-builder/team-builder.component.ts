@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-team-builder',
-  imports: [],
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './team-builder.component.html',
   styleUrl: './team-builder.component.scss'
 })

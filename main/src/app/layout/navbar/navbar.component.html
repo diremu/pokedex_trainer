@@ -1,16 +1,16 @@
 <nav class="navbar">
   <div class="navbar-left">
-    <h2 class="app-title">Pokédex Trainer</h2>
+    <h2 class="app-title">Pokédex Gym</h2>
   </div>
   
   <div class="navbar-center">
-    <input type="text" placeholder="Search Pokémon..." class="search-input">
+    <input type="text" placeholder="Search Pokémon..." class="search-input" (keyup)="keyUphandler($event)">
   </div>
   
   <div class="navbar-right">
     <div class="trainer-info">
-      <span>Welcome, <strong>Ash Ketchum</strong></span>
-      <img src="assets/pokeball-icon.png" alt="Avatar" class="trainer-avatar">
+      <span class="trainer-name">Welcome, <strong>Ash Ketchum</strong></span>
+      <img src="/assets/user.png" alt="Avatar" class="trainer-avatar">
     </div>
   </div>
 </nav>

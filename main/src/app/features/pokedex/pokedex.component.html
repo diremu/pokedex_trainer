@@ -1,1 +1,33 @@
-<p>pokedex works!</p>
+<section class="pokedex-page">
+  <div class="page-header">
+    <h1>National Pokédex</h1>
+    <p>Browse and search for Pokémon</p>
+  </div>
+
+  <div class="pokedex-controls">
+    <div class="search-box">
+      <input type="text" placeholder="Search by name or ID..." class="search-input">
+    </div>
+    <div class="filter-box">
+      <select class="filter-select">
+        <option>All Types</option>
+        <option>Fire</option>
+        <option>Water</option>
+        <option>Grass</option>
+        <option>Electric</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="pokemon-grid">
+    <div class="pokemon-card">
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png" alt="Bulbasaur">
+      <h3>Bulbasaur</h3>
+      <p>#001</p>
+      <span class="type-badge">Grass</span>
+      <span class="type-badge">Poison</span>
+      <button class="btn btn-sm">View Details</button>
+    </div>
+    <!-- More Pokemon cards will be generated dynamically -->
+  </div>
+</section>

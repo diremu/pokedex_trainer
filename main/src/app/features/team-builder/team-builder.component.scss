@@ -1,0 +1,131 @@
+$poke-red: #ef5350;
+$poke-blue: #3b4cca;
+
+.team-builder-page {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.page-header {
+  h1 {
+    font-size: 32px;
+    margin: 0;
+    color: $poke-blue;
+  }
+
+  p {
+    margin: 0.5rem 0 0 0;
+    color: #666;
+    font-size: 16px;
+  }
+}
+
+.team-container {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 2rem;
+}
+
+.team-panel,
+.team-editor {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+  h2 {
+    margin: 0 0 1.5rem 0;
+    color: $poke-blue;
+    font-size: 20px;
+  }
+}
+
+.team-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.team-item {
+  padding: 1rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+
+  &:hover {
+    border-color: $poke-red;
+    background-color: #fafafa;
+  }
+
+  h3 {
+    margin: 0;
+    font-size: 16px;
+    color: $poke-blue;
+  }
+
+  p {
+    margin: 0.5rem 0 1rem 0;
+    color: #666;
+    font-size: 14px;
+  }
+
+  .btn {
+    width: 100%;
+  }
+}
+
+.roster-slots {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.roster-slot {
+  padding: 1.5rem;
+  border: 2px dashed #ddd;
+  border-radius: 8px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  transition: all 0.3s ease;
+  min-height: 180px;
+
+  &.empty {
+    background-color: #f9f9f9;
+
+    &:hover {
+      border-color: $poke-red;
+      background-color: #fff5f5;
+    }
+  }
+
+  span {
+    font-weight: 600;
+    color: $poke-blue;
+  }
+
+  .btn {
+    width: 100%;
+  }
+}
+
+.btn {
+  &.btn-primary {
+    width: 100%;
+    margin-top: 1rem;
+  }
+}
+
+@media (max-width: 968px) {
+  .team-container {
+    grid-template-columns: 1fr;
+  }
+
+  .roster-slots {
+    grid-template-columns: 1fr;
+  }
+}
