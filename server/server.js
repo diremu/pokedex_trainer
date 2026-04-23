@@ -36,3 +36,5 @@ async function startServer() {
     console.error(err.message)
   }
 }
+
+startServer();

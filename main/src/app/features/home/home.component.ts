@@ -11,7 +11,13 @@ import { RouterLink } from '@angular/router';
 })
 export class HomeComponent {
   name = signal("Ash")
+  /**
+   * Simple navigator/debug helper invoked from the home view.
+   *
+   * @param event - The DOM event that triggered navigation
+   * @returns void
+   */
   navigator(event: Event) {
-    console.log(event)
+    console.log(event);
   }
 }

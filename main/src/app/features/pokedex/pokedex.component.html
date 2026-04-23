@@ -6,28 +6,54 @@
 
   <div class="pokedex-controls">
     <div class="search-box">
-      <input type="text" placeholder="Search by name or ID..." class="search-input">
+      <input
+        #searchInput
+        type="text"
+        placeholder="Search by name or ID..."
+        class="search-input"
+      />
     </div>
     <div class="filter-box">
-      <select class="filter-select">
-        <option>All Types</option>
-        <option>Fire</option>
-        <option>Water</option>
-        <option>Grass</option>
-        <option>Electric</option>
+      <select #typeSelect class="filter-select" (change)="onTypeSelected(typeSelect.value)">
+        <option *ngFor="let t of types$ | async" [value]="t" [selected]="t === 'All Types'">{{ t }}</option>
       </select>
     </div>
   </div>
 
-  <div class="pokemon-grid">
-    <div class="pokemon-card">
-      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png" alt="Bulbasaur">
-      <h3>Bulbasaur</h3>
-      <p>#001</p>
-      <span class="type-badge">Grass</span>
-      <span class="type-badge">Poison</span>
-      <button class="btn btn-sm">View Details</button>
-    </div>
-    <!-- More Pokemon cards will be generated dynamically -->
+  <table>
+    <thead>
+      <tr>
+        <th>Sprite</th>
+        <th class="sortable" title="Click: ascending — Double-click: descending" (click)="onHeaderClick('name','asc')" (dblclick)="onHeaderClick('name','desc')">Name <span *ngIf="sortColumn === 'name'">{{ sortDirection === 'asc' ? '▲' : '▼' }}</span></th>
+        <th>Type</th>
+        <th class="sortable" title="Click: ascending — Double-click: descending" (click)="onHeaderClick('hp','asc')" (dblclick)="onHeaderClick('hp','desc')">HP <span *ngIf="sortColumn === 'hp'">{{ sortDirection === 'asc' ? '▲' : '▼' }}</span></th>
+        <th class="sortable" title="Click: ascending — Double-click: descending" (click)="onHeaderClick('attack','asc')" (dblclick)="onHeaderClick('attack','desc')">ATK <span *ngIf="sortColumn === 'attack'">{{ sortDirection === 'asc' ? '▲' : '▼' }}</span></th>
+        <th class="sortable" title="Click: ascending — Double-click: descending" (click)="onHeaderClick('defense','asc')" (dblclick)="onHeaderClick('defense','desc')">DEF <span *ngIf="sortColumn === 'defense'">{{ sortDirection === 'asc' ? '▲' : '▼' }}</span></th>
+        <th class="sortable" title="Click: ascending — Double-click: descending" (click)="onHeaderClick('specialAttack','asc')" (dblclick)="onHeaderClick('specialAttack','desc')">Sp. ATK <span *ngIf="sortColumn === 'specialAttack'">{{ sortDirection === 'asc' ? '▲' : '▼' }}</span></th>
+        <th class="sortable" title="Click: ascending — Double-click: descending" (click)="onHeaderClick('specialDefense','asc')" (dblclick)="onHeaderClick('specialDefense','desc')">Sp. DEF <span *ngIf="sortColumn === 'specialDefense'">{{ sortDirection === 'asc' ? '▲' : '▼' }}</span></th>
+        <th class="sortable" title="Click: ascending — Double-click: descending" (click)="onHeaderClick('total','asc')" (dblclick)="onHeaderClick('total','desc')">Total <span *ngIf="sortColumn === 'total'">{{ sortDirection === 'asc' ? '▲' : '▼' }}</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let p of pokemon$ | async">
+        <td><img [src]="p.sprite" width="50" /></td>
+        <td>{{ p.name }}</td>
+        <td>
+          <span *ngFor="let t of p.types" class="type-badge {{t}}">{{ t }}</span>
+        </td>
+        <td>{{ p.hp }}</td>
+        <td>{{ p.attack }}</td>
+        <td>{{ p.defense }}</td>
+        <td>{{ p.specialAttack }}</td>
+        <td>{{ p.specialDefense }}</td>
+        <td>{{ p.total }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="pagination">
+    <button class="page-btn" (click)="prevPage()" [disabled]="currentPage === 0">Previous</button>
+    <span class="page-info">Page {{ currentPage + 1 }} / {{ totalPages }}</span>
+    <button class="page-btn" (click)="nextPage()" [disabled]="currentPage + 1 >= totalPages">Next</button>
   </div>
 </section>

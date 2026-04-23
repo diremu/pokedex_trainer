@@ -1,9 +1,12 @@
 <div class="app-container">
-  <app-sidebar />
-  
+  <app-sidebar [isOpen]="sidebarOpen" />
+
+  <!-- Mobile overlay -->
+  <div class="sidebar-overlay" *ngIf="sidebarOpen" (click)="closeSidebar()"></div>
+
   <div class="main-content">
-    <app-navbar  />
-    
+    <app-navbar (toggleSidebar)="toggleSidebar()" />
+
     <main class="page-content">
       <router-outlet />
     </main>

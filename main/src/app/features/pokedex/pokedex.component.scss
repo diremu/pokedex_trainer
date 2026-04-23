@@ -12,12 +12,20 @@ $poke-blue: #3b4cca;
     font-size: 32px;
     margin: 0;
     color: $poke-blue;
+
+    @media (max-width: 768px) {
+      font-size: 24px;
+    }
   }
 
   p {
     margin: 0.5rem 0 0 0;
     color: #666;
     font-size: 16px;
+
+    @media (max-width: 768px) {
+      font-size: 14px;
+    }
   }
 }
 
@@ -34,6 +42,11 @@ $poke-blue: #3b4cca;
     flex: 1;
     min-width: 200px;
     max-width: 40vw;
+
+    @media (max-width: 768px) {
+      min-width: 150px;
+      max-width: 100%;
+    }
   }
 
   .search-input,
@@ -52,6 +65,51 @@ $poke-blue: #3b4cca;
   }
 }
 
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 8px;
+  white-space: nowrap;
+
+  th,
+  td {
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid #f0f0f0;
+
+    @media (max-width: 768px) {
+      padding: 8px 12px;
+      min-width: 80px;
+    }
+
+    &:first-child {
+      @media (max-width: 768px) {
+        min-width: 60px;
+      }
+    }
+  }
+
+  th {
+    background: $poke-blue;
+    color: white;
+    font-weight: 600;
+    font-size: 14px;
+  }
+
+  tbody tr {
+    &:hover {
+      background-color: #f9f9f9;
+    }
+  }
+
+  img {
+    @media (max-width: 768px) {
+      width: 40px;
+      height: 40px;
+    }
+  }
+}
 .pokemon-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -107,6 +165,177 @@ $poke-blue: #3b4cca;
   }
 }
 
+.type-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: capitalize;
+  color: #fff;
+  min-width: 52px;
+  height: 28px;
+  line-height: 1;
+  margin: 0.25rem;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.type-badge:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+}
+
+.type-badge:focus-visible {
+  outline: 2px solid rgba(0, 0, 0, 0.12);
+  outline-offset: 2px;
+}
+
+.poison {
+  background-color: #51095a;
+  color: #fff;
+}
+
+.fire {
+  background-color: #ff4d4d;
+  color: #fff;
+}
+
+.flying {
+  background-color: #66b3ff;
+  color: #fff;
+}
+
+.grass {
+  background-color: #2ecc71;
+  color: #fff;
+}
+  
+/* Responsive table and badge adjustments for smaller screens */
+@media (max-width: 768px) {
+  table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  th,
+  td {
+    white-space: nowrap;
+    padding: 8px 12px;
+  }
+
+  .type-badge {
+    padding: 3px 8px;
+    min-width: auto;
+    height: 24px;
+    font-size: 11px;
+  }
+
+  .pokemon-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  }
+}
+.bug {
+  background-color: #6ab04c;
+  color: #fff;
+}
+
+.normal {
+  background-color: #d1d5db;
+  color: #111;
+  border-color: #e5e7eb;
+}
+
+.electric {
+  background-color: #f5b700;
+  color: #111;
+}
+
+.psychic {
+  background-color: #ff6fa3;
+  color: #fff;
+}
+
+.rock {
+  background-color: #8b7d5a;
+  color: #fff;
+}
+
+.ground {
+  background-color: #a6784c;
+  color: #fff;
+}
+
+.ice {
+  background-color: #9fe9ff;
+  color: #034;
+}
+
+.dragon {
+  background-color: #6b6bff;
+  color: #fff;
+}
+
+.dark {
+  background-color: #222;
+  color: #fff;
+}
+
+.fairy {
+  background-color: #ffb3e6;
+  color: #111;
+}
+
+.steel {
+  background-color: #9aa4ac;
+  color: #111;
+}
+
+.ghost {
+  background-color: #6a4f9b;
+  color: #fff;
+}
+ 
+.sortable {
+  cursor: pointer;
+  user-select: none;
+}
+
+.sortable:hover {
+  opacity: 0.95;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.page-btn {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #e0e0e0;
+  background: white;
+  cursor: pointer;
+}
+
+.page-btn[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.page-info {
+  font-size: 14px;
+  color: #333;
+}
+  
 @media (max-width: 768px) {
   .pokemon-grid {
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));

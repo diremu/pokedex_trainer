@@ -5,6 +5,10 @@ $bg-light: #f4f7f6;
 $sidebar-width: 260px;
 $navbar-height: 80px;
 
+@media (max-width: 768px) {
+  $navbar-height: 70px;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -15,6 +19,10 @@ $navbar-height: 80px;
   height: 100vh;
   background-color: $bg-light;
   overflow-y: hidden;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
 }
 
 .main-content {
@@ -31,6 +39,10 @@ $navbar-height: 80px;
   overflow-y: auto;
   padding: 2rem;
   background-color: $bg-light;
+
+  @media (max-width: 768px) {
+    padding: 1rem;
+  }
 }
 
 .btn {
@@ -96,7 +108,20 @@ $navbar-height: 80px;
   &[data-type="steel"] { background: #b8b8d0; color: white; }
   &[data-type="fairy"] { background: #ee99ac; color: white; }
 }
-  .content-body { padding: 2rem; }
+.sidebar-overlay {
+  display: none;
+
+  @media (max-width: 768px) {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+  }
+}
 
 .detail-panel {
   position: fixed;

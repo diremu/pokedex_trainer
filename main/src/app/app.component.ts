@@ -1,4 +1,4 @@
-import { Component, signal, Input } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet, RouterLink } from '@angular/router';
 import { NavbarComponent } from './layout/navbar/navbar.component';
@@ -13,4 +13,23 @@ import { SidebarComponent } from './layout/sidebar/sidebar.component';
 })
 export class AppComponent {
   title = signal('pokedex-trainers');
+  sidebarOpen = false;
+
+  /**
+   * Toggles the application sidebar open/closed state.
+   *
+   * @returns void - Updates the `sidebarOpen` signal to the opposite value
+   */
+  toggleSidebar() {
+    this.sidebarOpen = !this.sidebarOpen;
+  }
+
+  /**
+   * Closes the application sidebar.
+   *
+   * @returns void - Sets the `sidebarOpen` signal to false
+   */
+  closeSidebar() {
+    this.sidebarOpen = false;
+  }
 }

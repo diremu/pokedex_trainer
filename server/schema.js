@@ -1,6 +1,5 @@
-const { gql } = require('@apollo/server');
 
-const typeDefs = gql`
+const typeDefs = `
   type TrainerProfile {
     id: ID!
     name: String!
@@ -183,6 +182,13 @@ const typeDefs = gql`
     updateTrainerProfile(id: ID!, name: String, bio: String, title: String): TrainerProfile!
   }
 
+  input MoveInput {
+    turn: Int!
+    player: String!
+    pokemonId: Int!
+    moveName: String!
+    damage: Int!
+  }
 `;
 
 module.exports = typeDefs;
