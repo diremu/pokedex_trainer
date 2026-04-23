@@ -25,22 +25,24 @@
           <th>Actions</th>
         </tr>
       </thead>
-      <tbody>
-        <tr>
-          <td>2024-04-20</td>
-          <td>Gary Oak</td>
-          <td>Pikachu, Charizard, Blastoise</td>
-          <td><span class="badge-win">Won</span></td>
-          <td><button class="btn btn-sm">View Details</button></td>
-        </tr>
-        <tr>
-          <td>2024-04-19</td>
-          <td>Brock</td>
-          <td>Pikachu, Butterfree, Pidgeot</td>
-          <td><span class="badge-win">Won</span></td>
-          <td><button class="btn btn-sm">View Details</button></td>
-        </tr>
-      </tbody>
+        <tbody>
+          <tr *ngFor="let battle of battles$ | async">
+            <td>{{ battle.date }}</td>
+            <td>{{ battle.opponentName }}</td>
+            <td>
+              <ng-container *ngIf="battle.teamId; else noTeam">
+                <span class="team-id">Team {{ battle.teamId }}</span>
+              </ng-container>
+              <ng-template #noTeam>—</ng-template>
+            </td>
+            <td>
+              <span [class.badge-win]="battle.result === 'WIN'" [class.badge-loss]="battle.result === 'LOSS'" [class.badge-draw]="battle.result === 'DRAW'">
+                {{ battle.result }}
+              </span>
+            </td>
+            <td><button class="btn btn-sm">View Details</button></td>
+          </tr>
+        </tbody>
     </table>
   </div>
 
@@ -49,19 +51,19 @@
     <div class="stats-grid">
       <div class="stat-card">
         <span class="stat-label">Total Battles</span>
-        <span class="stat-value">25</span>
+        <span class="stat-value">{{ (profile$ | async)?.stats?.totalBattles || 0 }}</span>
       </div>
       <div class="stat-card">
         <span class="stat-label">Wins</span>
-        <span class="stat-value">18</span>
+        <span class="stat-value">{{ (profile$ | async)?.stats?.wins || 0 }}</span>
       </div>
       <div class="stat-card">
         <span class="stat-label">Win Rate</span>
-        <span class="stat-value">72%</span>
+        <span class="stat-value">{{ ((profile$ | async)?.stats?.winRate || 0) * 100 | number:'1.0-0' }}%</span>
       </div>
       <div class="stat-card">
         <span class="stat-label">Streak</span>
-        <span class="stat-value">4</span>
+        <span class="stat-value">{{ (profile$ | async)?.stats?.currentStreak || 0 }}</span>
       </div>
     </div>
   </div>

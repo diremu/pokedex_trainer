@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { map, retryWhen, scan, delay } from 'rxjs/operators';
+import { map, retryWhen, scan, delay, catchError } from 'rxjs/operators';
 
 export interface Trainer {
   id: string;
@@ -19,6 +19,11 @@ export interface Battle {
   id: string;
   trainerId: string;
   result: 'WIN' | 'LOSS' | 'DRAW';
+  opponentName?: string;
+  teamId?: string | null;
+  date?: string;
+  scoreTrainer?: number;
+  scoreOpponent?: number;
 }
 
 @Injectable({ providedIn: 'root' })
@@ -31,6 +36,9 @@ export class TrainerStore {
 
   private battlesSubject = new BehaviorSubject<Battle[]>([]);
   battles$ = this.battlesSubject.asObservable();
+
+  private profileSubject = new BehaviorSubject<any | null>(null);
+  profile$ = this.profileSubject.asObservable();
 
   constructor(private http: HttpClient) {}
   /**
@@ -157,6 +165,51 @@ export class TrainerStore {
         console.error('createTeam failed, rolling back optimistic update', err);
         this.deleteTeam(tempId);
       }
+    });
+  }
+
+  /**
+   * Loads a trainer profile (including teams and battles) from the GraphQL API
+   * and updates the local store subjects.
+   *
+   * @param id - Trainer id (string or number)
+   */
+  loadTrainerProfile(id: string | number) {
+    const query = `query GetTrainerProfile($id: ID!) {\n      getTrainerProfile(id: $id) {\n        id\n        name\n        title\n        avatar\n        stats { totalBattles wins losses winRate currentStreak }\n        teams { id trainerId name pokemon createdAt updatedAt }\n        battles { id trainerId opponentId opponentName teamId result date }\n      }\n    }`;
+
+    const body = { query, variables: { id: String(id) } };
+
+    this.http.post<any>('http://localhost:4000/graphql', body).pipe(
+      map(res => res?.data?.getTrainerProfile || null),
+      catchError(err => {
+        console.error('Error loading trainer profile:', err);
+        return of(null);
+      })
+    ).subscribe(profile => {
+      if (!profile) return;
+
+      this.profileSubject.next(profile);
+      this.trainerSubject.next({ id: String(profile.id), name: profile.name });
+
+      const teams = (profile.teams || []).map((t: any) => ({
+        id: String(t.id),
+        trainerId: String(t.trainerId ?? t.trainer_id ?? profile.id),
+        name: t.name,
+        pokemon: (t.pokemon || []).map((p: any) => Number(p))
+      }));
+
+      this.teamsSubject.next(teams);
+
+      const battles = (profile.battles || []).map((b: any) => ({
+        id: String(b.id),
+        trainerId: String(b.trainerId ?? b.trainer_id ?? profile.id),
+        result: (b.result || '').toUpperCase(),
+        opponentName: b.opponentName || b.opponent_name || '',
+        teamId: b.teamId || b.team_id || null,
+        date: b.date || ''
+      }));
+
+      this.battlesSubject.next(battles);
     });
   }
 }

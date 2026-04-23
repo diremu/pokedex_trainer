@@ -7,48 +7,30 @@
   <div class="team-container">
     <div class="team-panel">
       <h2>My Teams</h2>
-      <div class="team-list">
-        <div class="team-item">
-          <h3>Fire Team</h3>
-          <p>6 Pokémon selected</p>
-          <button class="btn btn-sm">Edit</button>
+        <div class="team-list">
+          <div class="team-item" *ngFor="let team of teams$ | async">
+            <h3>{{ team.name }}</h3>
+            <p>{{ team.pokemon?.length || 0 }} Pokémon selected</p>
+            <button class="btn btn-sm" (click)="loadTeam(team)">Edit</button>
+          </div>
+          <button class="btn btn-primary" (click)="saveTeam()">Save Current Team</button>
         </div>
-        <div class="team-item">
-          <h3>Water Team</h3>
-          <p>4 Pokémon selected</p>
-          <button class="btn btn-sm">Edit</button>
-        </div>
-        <button class="btn btn-primary">Create New Team</button>
-      </div>
     </div>
 
     <div class="team-editor">
       <h2>Team Roster</h2>
       <div class="roster-slots">
-        <div class="roster-slot empty">
-          <span>Slot 1</span>
-          <button class="btn btn-sm">Add Pokémon</button>
-        </div>
-        <div class="roster-slot empty">
-          <span>Slot 2</span>
-          <button class="btn btn-sm">Add Pokémon</button>
-        </div>
-        <div class="roster-slot empty">
-          <span>Slot 3</span>
-          <button class="btn btn-sm">Add Pokémon</button>
-        </div>
-        <div class="roster-slot empty">
-          <span>Slot 4</span>
-          <button class="btn btn-sm">Add Pokémon</button>
-        </div>
-        <div class="roster-slot empty">
-          <span>Slot 5</span>
-          <button class="btn btn-sm">Add Pokémon</button>
-        </div>
-        <div class="roster-slot empty">
-          <span>Slot 6</span>
-          <button class="btn btn-sm">Add Pokémon</button>
-        </div>
+          <div class="roster-slot" *ngFor="let slot of selectedSlots; let i = index">
+            <ng-container *ngIf="slotDetails[i]; else emptySlot">
+              <img [src]="slotDetails[i]?.sprite" alt="{{ slotDetails[i]?.name }}" />
+              <div class="slot-name">{{ slotDetails[i]?.name }}</div>
+              <button class="btn btn-sm" (click)="removeFromSlot(i)">Remove</button>
+            </ng-container>
+            <ng-template #emptySlot>
+              <span>Slot {{ i + 1 }}</span>
+              <button class="btn btn-sm" (click)="addPokemonToSlot(i)">Add Pokémon</button>
+            </ng-template>
+          </div>
       </div>
     </div>
   </div>

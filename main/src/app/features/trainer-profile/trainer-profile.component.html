@@ -2,12 +2,12 @@
   <div class="profile-header">
     <div class="profile-cover"></div>
     <div class="profile-content">
-      <img src="assets/pokeball.webp" alt="Trainer Avatar" class="profile-avatar">
-      <div class="profile-info">
-        <h1>Ash Ketchum</h1>
-        <p class="trainer-title">Gym Leader</p>
-        <p class="trainer-bio">Gotta catch 'em all!</p>
-      </div>
+        <img [src]="(profile$ | async)?.avatar || 'assets/pokeball.webp'" alt="Trainer Avatar" class="profile-avatar">
+        <div class="profile-info">
+          <h1>{{ (profile$ | async)?.name || 'Trainer' }}</h1>
+          <p class="trainer-title">{{ (profile$ | async)?.title || '' }}</p>
+          <p class="trainer-bio">{{ (profile$ | async)?.bio || '' }}</p>
+        </div>
     </div>
   </div>
 
@@ -38,20 +38,20 @@
       <h2>Statistics</h2>
       <div class="stats-overview">
         <div class="stat-row">
-          <span>Pokémon Caught</span>
-          <span class="stat-number">450</span>
-        </div>
-        <div class="stat-row">
           <span>Battles Completed</span>
-          <span class="stat-number">100</span>
+          <span class="stat-number">{{ (profile$ | async)?.stats?.totalBattles || 0 }}</span>
         </div>
         <div class="stat-row">
-          <span>Teams Created</span>
-          <span class="stat-number">8</span>
+          <span>Wins</span>
+          <span class="stat-number">{{ (profile$ | async)?.stats?.wins || 0 }}</span>
         </div>
         <div class="stat-row">
-          <span>Experience Points</span>
-          <span class="stat-number">15,240</span>
+          <span>Win Rate</span>
+          <span class="stat-number">{{ ((profile$ | async)?.stats?.winRate || 0) * 100 | number:'1.0-0' }}%</span>
+        </div>
+        <div class="stat-row">
+          <span>Teams</span>
+          <span class="stat-number">{{ (profile$ | async)?.teams?.length || 0 }}</span>
         </div>
       </div>
     </div>
